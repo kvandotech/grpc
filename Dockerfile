@@ -8,5 +8,4 @@ RUN yarn
 RUN npm install -g serve
 COPY . /app/
 RUN yarn build
-
 CMD ["serve", "-s", "build"]
