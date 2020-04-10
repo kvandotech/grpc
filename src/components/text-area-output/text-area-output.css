@@ -1,0 +1,26 @@
+.output {
+    padding: 0 .5rem .5rem .5rem;
+    border: 2px solid black;
+    background: #101c2a;
+    height: 700px;
+    font-size: 15px;
+    border-radius: 15px;
+    outline: none;
+}
+
+.title{
+    margin: .7rem 0 .5rem .5rem;
+    color: #d26916;
+    font-size: 1.2rem;
+}
+
+.btn{
+    font-size: 1rem;
+    padding: .2rem 1rem;
+    margin: auto .5rem auto ;
+}
+
+.check-style{
+    color: #d4d4d4;
+    margin: auto .5rem auto ;
+}

@@ -1,0 +1,30 @@
+.header {
+    padding: .7rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: burlywood;
+    box-shadow: 0 0 16px rgba(38, 38, 38, 0.65);
+}
+
+.header img{
+    margin-left: 5rem;
+    width: 100px;
+}
+
+.header a:hover {
+    transition: all 0.3s ease-in-out;
+    color: #6ad7e5;
+}
+
+.header a {
+    font-size: 1.3rem;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-nav-link{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}

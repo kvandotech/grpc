@@ -1,0 +1,73 @@
+.struct-description {
+    width: 100%;
+    height: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.struct-description h3 {
+    font-size: 1.5rem;
+}
+
+.struct-description-card {
+    max-width: 700px;
+    width: 100%;
+    height: 90%;
+    order: 1;
+}
+
+.struct-description-card h3 {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.struct-description-doc h3 {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.struct-description-doc {
+    order: 2;
+}
+
+.struct-description-doc-container {
+    padding-left: 2rem;
+    border-left: 1px solid black;
+    height: 85%;
+}
+
+.struct-description-codemirror {
+    width: 100%;
+    height: 93%;
+    padding-left: 2rem;
+    border-left: 1px solid black;
+    /*border-right: 1px solid black;*/
+
+}
+
+.struct-description-codemirror .CodeMirror {
+    font-size: 1.2rem;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+
+
+}
+
+@media (max-width: 1346px) {
+    .struct-description {
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .struct-description-doc h3 {
+        margin-top: 3rem;
+        text-align: center;
+    }
+    .struct-description-doc{
+        margin-bottom: 4rem;
+    }
+
+
+}

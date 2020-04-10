@@ -1,0 +1,27 @@
+.input {
+    padding: 0 .5rem .5rem .5rem;
+    border: 2px solid black;
+    background: #101c2a;
+    height: 700px;
+    min-height: 450px;
+    font-size: 15px;
+    border-radius: 15px;
+    outline: none;
+}
+
+.title{
+    margin: .7rem 0 .5rem .5rem;
+    color: #d26916;
+    font-size: 1.2rem;
+}
+
+.react-codemirror2 {
+    position: inherit;
+    max-height: 93%;
+    height: 100%;
+}
+
+.CodeMirror {
+    position: inherit;
+
+}

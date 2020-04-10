@@ -1,0 +1,23 @@
+.list-item{
+    margin-top: 2rem;
+    margin-left: 3rem;
+    width:250px;
+    height: 200px;
+}
+.documentation-list-item{
+    margin-right: 4rem;
+    width: 300px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+}
+
+.documentation-list-item .active{
+    background-color: #6ad7e5;
+    border: 1px solid #6ad7e5;
+}
+
+.documentation-list-item img{
+    width: 105%;
+    margin-left: 1rem;
+}

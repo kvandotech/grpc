@@ -1,0 +1,11 @@
+.footer{
+    grid-area: f;
+    width: 100%;
+    height: 4rem;
+    background: #dadada;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: #343434;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}

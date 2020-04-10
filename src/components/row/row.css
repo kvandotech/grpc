@@ -1,0 +1,16 @@
+.row {
+    grid-area: row;
+    margin: 0;
+    min-height: 100%;
+    display: grid;
+    grid-template-areas: "l r";
+    grid-template-columns: 50% 50%;
+}
+
+.row-child-left {
+    grid-area: l;
+}
+
+.row-child-right {
+    grid-area: r;
+}
