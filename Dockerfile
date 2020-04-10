@@ -1,4 +1,4 @@
-FROM node:13.12.0-13-slim
+FROM node:13.12.0-slim
 WORKDIR /app
 COPY package.json /app/package.json
 COPY yarn.lock /app/yarn.lock
