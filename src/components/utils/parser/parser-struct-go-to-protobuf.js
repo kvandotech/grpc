@@ -2,6 +2,8 @@ let enumObj = {},
     rpcMethods = [];
 const responseProto = 'ResponseProto',
     requestProto = 'RequestProto',
+    response = 'Response',
+    request = 'Request',
     protobufEmpty = 'google.protobuf.Empty';
 
 //Leads to a single case, and also removes the reference character
@@ -215,8 +217,8 @@ const convertArrStructGoToObj = (arrStruct) => {
             } else {
                 name = item;
             }
-            if (name.includes('RequestProto') ||
-                name.includes('ResponseProto')) {
+            if (name.includes('Request') ||
+                name.includes('Response')) {
                 rpcMethods.push(name);
             }
             const {nameMessage, enumName = ''} = isEnumName(name);
@@ -251,15 +253,20 @@ const printEnum = (enumEl) => {
 
 //Returns the primary name of the method without proto parameters
 const getNameMethod = (fullName) => {
-    let idx;
+    let idx, arr;
     if (fullName.includes(requestProto)) {
-        idx = fullName.indexOf(requestProto);
-        return fullName.slice(0, idx);
+        arr = fullName.split(requestProto);
+        return arr.join('');
+    } else if (fullName.includes(responseProto)) {
+        arr = fullName.split(responseProto);
+        return arr.join('');
+    } else if (fullName.includes(request)) {
+        arr = fullName.split(request);
+        return arr.join('');
     } else {
-        idx = fullName.indexOf(responseProto);
-        return fullName.slice(0, idx);
+        arr = fullName.split(response);
+        return arr.join('');
     }
-
 };
 
 //Defines response and request names
@@ -268,8 +275,13 @@ const determineTheEndName = (lastNameProto, preLastNameProto) => {
         requestName: '',
         responseName: ''
     };
-    rpcObj.requestName = lastNameProto.includes(requestProto) ? lastNameProto : preLastNameProto;
-    rpcObj.responseName = lastNameProto.includes(responseProto) ? lastNameProto : preLastNameProto;
+    if(lastNameProto.includes(requestProto)||lastNameProto.includes(responseProto)){
+        rpcObj.requestName = lastNameProto.includes(requestProto) ? lastNameProto : preLastNameProto;
+        rpcObj.responseName = lastNameProto.includes(responseProto) ? lastNameProto : preLastNameProto;
+    }else{
+        rpcObj.requestName = lastNameProto.includes(request) ? lastNameProto : preLastNameProto;
+        rpcObj.responseName = lastNameProto.includes(response) ? lastNameProto : preLastNameProto;
+    }
 
     return rpcObj;
 };

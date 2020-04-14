@@ -89,7 +89,6 @@ class TextAreaOutput extends Component {
 
                     }}
                     onBeforeChange={(editor, data, value) => {
-                        debugger;
                         this.onBeforeChangeSaveEditor(editor);
                         this.onBeforeChangeSaveProrobuf(value);
 

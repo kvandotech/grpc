@@ -56,7 +56,7 @@ type GetEditsFromTxidResponseProto int32{
                     <div className={'struct-description-doc-container'}>
                         <p>To get the correct conversion result:</p>
                         <ul>
-                            <li>Add <strong>RequestProto</strong > or <strong>ResponseProto.</strong> to the end of the parameter structure tag.</li>
+                            <li>Add a <strong>RequestProto</strong > or <strong>ResponseProto</strong> or <strong>Request</strong > or <strong>Response</strong> to the body of the function name.</li>
                             <li>If one of the parameters won’t be specified in the medot, <strong>google.protobuf.Empty</strong > will be listed instead.</li>
                             <li>The <strong>import "google/protobuf/empty.proto"</strong> will be automatically inserted into the Protobuf structure.</li>
                             <li>Use the <strong>RPC methods</strong> in the editor window to display <strong>RPC</strong> methods in the Protobuf structure</li>
