@@ -253,7 +253,7 @@ const printEnum = (enumEl) => {
 
 //Returns the primary name of the method without proto parameters
 const getNameMethod = (fullName) => {
-    let idx, arr;
+    let  arr;
     if (fullName.includes(requestProto)) {
         arr = fullName.split(requestProto);
         return arr.join('');

@@ -5,7 +5,7 @@ const Footer = ()=>{
 
     return (
         <div className={'footer d-flex justify-content-center align-items-center'}>
-            <div>© 2020 Kvando</div>
+            <div>© 2020 Kvando Tech</div>
         </div>
     )
 };
