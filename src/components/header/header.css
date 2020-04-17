@@ -2,7 +2,7 @@
     padding: .7rem;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: burlywood;
     box-shadow: 0 0 16px rgba(38, 38, 38, 0.65);
 }
@@ -26,6 +26,18 @@
 .nav-nav-link{
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+}
+
+.nav-nav-link .documentation{
+    margin-right: 13rem;
+}
+
+@media (max-width: 1350px) {
+
+    .nav-nav-link .documentation{
+        margin-right: 9rem;
+    }
+
 }
