@@ -8,7 +8,7 @@ const Profile = () => {
 
             <div className={'go-to-protobuf'}>
                 <h1>Go-to-Protobuf</h1>
-                <h2>Convert Go struct to Protobuf</h2>
+                <h2>Generate .proto files from Go source code</h2>
                 <a className={'mail'}
                     href={'mailto:kvandotech@gmail.com'}>
                     <span className={'mail-title'}>© 2020 Kvando Tech</span>
