@@ -12,7 +12,7 @@ import 'codemirror/addon/edit/closebrackets.js'
 
 export default class TextAreaInput extends Component {
     state = {
-        term: example
+        term: example,
     };
 
     onClick = () => {

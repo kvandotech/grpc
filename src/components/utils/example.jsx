@@ -1,7 +1,7 @@
 const example = `type Field struct {
 \tID string
 \tName string
-\tNamber int32
+\tNumber int32
 \tIsMandatory bool
 \tEventFieldItem []*EventFieldItem
 }
@@ -30,12 +30,13 @@ type Message struct {
 \tHeightInCm           uint32                             
 \tData                 []byte                             
 \tResultCount          int64  
+\tManyThings           []*any.Any
 }
 
 type ListOpenFilesRequestProto  int32{
 \tID string
 \tName string
-\tNamber int32
+\tNumber int32
 }
 
 type ListOpenFilesResponseProto  int32{

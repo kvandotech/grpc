@@ -1,10 +1,14 @@
+import googleImports from "./imports";
+
 let enumObj = {},
-    rpcMethods = [];
+    rpcMethods = [],
+    importsSet = new Set();
 const responseProto = 'ResponseProto',
     requestProto = 'RequestProto',
     response = 'Response',
     request = 'Request',
-    protobufEmpty = 'google.protobuf.Empty';
+    protobufEmpty = 'google.protobuf.Empty',
+    importsMap = googleImports;
 
 //Leads to a single case, and also removes the reference character
 const lowerField = (str) => {
@@ -90,8 +94,7 @@ const parseRepeated = (typeName) => {
 
 //Parses map type
 const parseMap = (typeName) => {
-
-    let arr = typeName.split(/\b\W/g);
+    let arr = typeName.split(/[[\]]/g);
     arr = arr.map((item, idx) => {
         if (idx !== 0) {
             return normalizeType(item);
@@ -127,12 +130,18 @@ const parserType = (typeName) => {
     return normalizeType(typeName);
 };
 
+
 //Breaks the object into types from the structure body and sends it to parsing
 const parserTypeInObj = (item) => {
     for (let value of Object.values(item)) {
         if (value !== null) {
             for (let [key, valueNext] of Object.entries(value)) {
                 value[key] = parserType(valueNext);
+                importsMap.forEach((valueItem, keyItem) => {
+                    if (valueNext.includes(keyItem)) {
+                        importsSet.add(valueItem);
+                    }
+                });
             }
         }
     }
@@ -253,7 +262,7 @@ const printEnum = (enumEl) => {
 
 //Returns the primary name of the method without proto parameters
 const getNameMethod = (fullName) => {
-    let  arr;
+    let arr;
     if (fullName.includes(requestProto)) {
         arr = fullName.split(requestProto);
         return arr.join('');
@@ -275,10 +284,10 @@ const determineTheEndName = (lastNameProto, preLastNameProto) => {
         requestName: '',
         responseName: ''
     };
-    if(lastNameProto.includes(requestProto)||lastNameProto.includes(responseProto)){
+    if (lastNameProto.includes(requestProto) || lastNameProto.includes(responseProto)) {
         rpcObj.requestName = lastNameProto.includes(requestProto) ? lastNameProto : preLastNameProto;
         rpcObj.responseName = lastNameProto.includes(responseProto) ? lastNameProto : preLastNameProto;
-    }else{
+    } else {
         rpcObj.requestName = lastNameProto.includes(request) ? lastNameProto : preLastNameProto;
         rpcObj.responseName = lastNameProto.includes(response) ? lastNameProto : preLastNameProto;
     }
@@ -363,15 +372,29 @@ const printStruct = (item, enumObj) => {
     return structString;
 };
 
+const printImports = (importsSet, structString) => {
+    let idx;
+    importsSet.forEach((value) => {
+        idx = structString.indexOf('package proto;');
+        structString = addNewItemToSelectedPositionToString(structString, idx, `import "${value}";\n`);
+    });
+
+    importsSet.clear();
+
+    return structString;
+};
+
 //Main method
 export const parserGoStruct = (stringGoStruct, isRpc = false) => {
     enumObj = {};
     rpcMethods = [];
+    importsSet.clear();
     let arrStruct = stringGoStruct.split('type'),
         objStruct,
         arrIdx = [],
         structRpcMethods,
         structString;
+    debugger;
     arrStruct = croppingElementOfArray(arrStruct, 0);
     objStruct = convertArrStructGoToObj(arrStruct);
     objStruct.map((item, idx) => {
@@ -390,13 +413,17 @@ export const parserGoStruct = (stringGoStruct, isRpc = false) => {
         structRpcMethods = createRpcMethods(rpcMethods);
     }
 
-    structString = objStruct.reduce((str, item) => str += printStruct(item, enumObj), `syntax = "proto3";\npackage proto;\n\n\n`);
+    structString = objStruct.reduce((str, item) => str += printStruct(item, enumObj), `syntax = "proto3";\npackage proto;\n\n`);
+
+    structString = printImports(importsSet, structString);
+debugger;
     if (isRpc && structRpcMethods !== undefined) {
-        if (structRpcMethods.includes(protobufEmpty)) {
-            const idx = structString.indexOf('package proto;');
-            structString = addNewItemToSelectedPositionToString(structString, idx, 'import "google/protobuf/empty.proto";\n\n');
+        if (structRpcMethods.includes(protobufEmpty) && !structString.includes('google/protobuf/empty.proto')) {
+            importsSet.add('google/protobuf/empty.proto');
+            structString = printImports(importsSet, structString);
         }
         structString += structRpcMethods;
     }
     return structString;
 };
+
